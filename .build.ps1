@@ -90,7 +90,7 @@ https://github.com/nightroman/FarNet#readme
 		<projectUrl>https://github.com/nightroman/$ModuleName</projectUrl>
 		<license type="expression">Apache-2.0</license>
 		<description>$description</description>
-		<releaseNotes>https://github.com/nightroman/FarNet.FSharp.Data/blob/main/Release-Notes.md</releaseNotes>
+		<releaseNotes>https://github.com/nightroman/$ModuleName/blob/main/Release-Notes.md</releaseNotes>
 		<tags>FarManager FarNet FSharp Unquote Assert Testing</tags>
 	</metadata>
 </package>
