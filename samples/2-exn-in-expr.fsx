@@ -1,13 +1,16 @@
 ﻿open Swensen.Unquote
 
-type Rec1 = { Name: string }
-let rec1 = { Name = null }
+type Data() =
+    member val Name: string = null
 
-let expr = <@ rec1.Name.Length = 42 @>
+// this expression fails due to an exception, not false result
+let expr = <@ Data().Name.Length = 42 @>
 
-raises<AssertionFailedException> <@ test expr @>
-
+// Unquote `test` explains where and why the exception happens
 try
     test expr
 with ex ->
-    printfn "%A" ex
+    printfn "%O" ex
+
+// (just to be sure that it throws as expected)
+raises<AssertionFailedException> <@ test expr @>

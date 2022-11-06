@@ -1,11 +1,21 @@
-﻿// https://stackoverflow.com/a/15324536/323582
+﻿// How to evaluate and compile quotations (Unquote is not needed)
 
 open Microsoft.FSharp.Linq.RuntimeHelpers
 
-LeafExpressionConverter.EvaluateQuotation <@ 1 + 2 @>
-|> printfn "%A"
+// evaluate a value
+let value = LeafExpressionConverter.EvaluateQuotation <@ 1 + 2 @>
+printfn "%A" value
 
-let fn1 = LeafExpressionConverter.EvaluateQuotation <@ fun y -> y + 1.0 @> :?> double -> double
+// compile a function
+let add1 = LeafExpressionConverter.EvaluateQuotation <@ fun y -> y + 1.0 @> :?> double -> double
 
-fn1 10
-|> printfn "%A"
+// call the function
+add1 10
+|> printfn "%f"
+
+// test
+
+open Swensen.Unquote
+
+test <@ value :?> int = 3 @>
+test <@ add1 10 = 11 @>
