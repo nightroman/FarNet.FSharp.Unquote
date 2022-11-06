@@ -4,7 +4,7 @@ let x = "foo"
 let y = "bar"
 
 try
-    // `trap` evaluates the given expression and return its value.
+    // `trap` evaluates the given expression and returns its value.
     // But if the expression throws, `trap` works like `test`.
     let res = trap <@ 1 / (x.Length - y.Length) @>
 
