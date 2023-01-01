@@ -1,5 +1,5 @@
 [/samples]: https://github.com/nightroman/FarNet.FSharp.Unquote/tree/main/samples
-[FarNet.FSharpFar]: https://github.com/nightroman/FarNet/tree/master/FSharpFar
+[FarNet.FSharpFar]: https://github.com/nightroman/FarNet/tree/main/FSharpFar#readme
 [Unquote]: https://github.com/SwensenSoftware/unquote
 
 # FarNet.FSharp.Unquote

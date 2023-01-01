@@ -11,6 +11,7 @@ param(
 Set-StrictMode -Version 3
 $ModuleName = 'FarNet.FSharp.Unquote'
 $ModuleRoot = "$FarHome\FarNet\Lib\$ModuleName"
+$Description = 'F# Unquote package for FarNet.FSharpFar'
 
 # Synopsis: Remove temp files.
 task clean {
@@ -39,6 +40,7 @@ task publish {
 # Synopsis: Set $script:Version.
 task version {
 	($script:Version = switch -Regex -File Release-Notes.md {'##\s+v(\d+\.\d+\.\d+)' {$Matches[1]; break} })
+	assert $script:Version
 }
 
 # Synopsis: Convert markdown to HTML.
@@ -58,6 +60,10 @@ task package markdown, {
 	remove z
 	$toModule = mkdir "z\tools\FarHome\FarNet\Lib\$ModuleName"
 
+	Copy-Item -Destination z @(
+		'README.md'
+	)
+
 	Copy-Item -Destination $toModule @(
 		'README.htm'
 		'LICENSE'
@@ -68,17 +74,6 @@ task package markdown, {
 
 # Synopsis: Make NuGet package.
 task nuget package, version, {
-	$description = @'
-F# Unquote package for FarNet.FSharpFar
-
----
-
-The package is designed for FarNet.FSharpFar.
-To install FarNet packages, follow these steps:
-
-https://github.com/nightroman/FarNet#readme
-'@
-
 	Set-Content z\Package.nuspec @"
 <?xml version="1.0"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
@@ -87,9 +82,10 @@ https://github.com/nightroman/FarNet#readme
 		<version>$Version</version>
 		<authors>Roman Kuzmin</authors>
 		<owners>Roman Kuzmin</owners>
-		<projectUrl>https://github.com/nightroman/$ModuleName</projectUrl>
 		<license type="expression">Apache-2.0</license>
-		<description>$description</description>
+		<readme>README.md</readme>
+		<projectUrl>https://github.com/nightroman/$ModuleName</projectUrl>
+		<description>$Description</description>
 		<releaseNotes>https://github.com/nightroman/$ModuleName/blob/main/Release-Notes.md</releaseNotes>
 		<tags>FarManager FarNet FSharp Unquote Assert Testing</tags>
 	</metadata>
