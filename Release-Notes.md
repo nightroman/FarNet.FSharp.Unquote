@@ -1,5 +1,9 @@
 # FarNet.FSharp.Unquote Release Notes
 
+## v2.0.0
+
+.NET 8
+
 ## v1.0.1
 
 Maintenance.
